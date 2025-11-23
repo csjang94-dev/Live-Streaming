@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <title>프로젝트: AWS 라이브 스트리밍 시스템 (2025.11.13 - 2025.11.18)</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    :root{
+      --main-border-color : #EFF5D2;
+      --main-title-color : #C6D870;
+      --main-font-color : #8FA31E;
+      --contents-font-color : #556B2F;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f4f8;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .slide {
+      background: #FFFFFF;
+      padding: 30px 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--main-title-color);
+      margin: 0 0 20px 0;
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--main-border-color);
+      line-height: 1.3;
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--main-title-color);
+      margin: 25px 0 12px 0;
+      padding-bottom: 5px;
+      border-bottom: 1px solid var(--main-border-color);
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--main-title-color);
+      margin: 15px 0 8px 0;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--contents-font-color);
+      margin: 0 0 10px 0;
+    }
+
+    ul {
+      margin: 0 0 15px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--contents-font-color);
+      margin-bottom: 6px;
+    }
+
+    strong {
+      color: var(--contents-font-color);
+      font-weight: 600;
+    }
+
+    /* 메타 그리드 */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .meta-item {
+      background: #f7fafc;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid var(--main-border-color);
+      text-align: center;
+    }
+
+    .meta-label {
+      font-size: 12px;
+      color: var(--contents-font-color);
+      margin-bottom: 5px;
+    }
+
+    .meta-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--contents-font-color);
+    }
+
+    /* 기술 스택 그리드 */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .tech-item {
+      background: #edf2f7;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--contents-font-color);
+      text-align: center;
+    }
+
+    /* 성과 배지 */
+    .achievements {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 15px 0;
+    }
+
+    .achievement-badge {
+      background: #e2e8f0;
+      color: var(--contents-font-color);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* 기능 그리드 */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .feature-item {
+      background: #f7fafc;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid var(--main-border-color);
+    }
+
+    .feature-item strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: var(--main-font-color);
+    }
+
+    .feature-item p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--contents-font-color);
+      margin: 0;
+    }
+
+    /* 아키텍처 박스 */
+    .architecture-box {
+      background: #1a202c;
+      color: #e2e8f0;
+      padding: 20px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      line-height: 1.4;
+      white-space: pre;
+      margin: 15px 0;
+      overflow-x: auto;
+    }
+
+    /* 프로토콜 그리드 */
+    .protocol-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .protocol-item {
+      background: #edf2f7;
+      padding: 12px;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .protocol-icon {
+      font-size: 20px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .protocol-text {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--contents-font-color);
+    }
+
+    /* 스크린샷 그리드 */
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .screenshot-item {
+      height: 180px;
+      border-radius: 8px;
+      border: 2px solid var(--main-border-color);
+      background: #f7fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--contents-font-color);
+      font-size: 14px;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .screenshot-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Phase 그리드 */
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .phase-item {
+      background: #f7fafc;
+      padding: 15px;
+      border-radius: 8px;
+      border-top: 4px solid var(--main-border-color);
+    }
+
+    .phase-item strong {
+      display: block;
+      font-size: 13px;
+      color: var(--main-font-color);
+      margin-bottom: 6px;
+    }
+
+    .phase-item p {
+      font-size: 12px;
+      color: var(--contents-font-color);
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    /* 상세 섹션 */
+    .detail-block {
+      background: #f7fafc;
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin: 10px 0;
+      border-left: 4px solid var(--main-border-color);
+    }
+
+    .detail-block h3 {
+      margin: 0 0 8px 0;
+      color: var(--main-font-color);
+    }
+
+    .detail-block p {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    /* 페이지 번호 */
+    .page-number {
+      text-align: center;
+      font-size: 12px;
+      color: var(--contents-font-color);
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid var(--main-border-color);
+    }
+
+    /* 반응형 */
+    @media (max-width: 768px) {
+      .meta-grid,
+      .tech-grid,
+      .protocol-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .features-grid,
+      .phase-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .screenshot-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .screenshot-item {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 페이지 1: 개요 -->
+  <div class="slide">
+    <h1> AWS 라이브 스트리밍 시스템 (2025.11.13 - 2025.11.18)</h1>
+    
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label">기간</div>
+        <div class="meta-value">6일</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">팀 구성</div>
+        <div class="meta-value">1인</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">역할</div>
+        <div class="meta-value">풀스택</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">완성도</div>
+        <div class="meta-value">100%</div>
+      </div>
+    </div>
+
+    <h2> 프로젝트 개요</h2>
+    <p>
+      모바일 앱(CameraFi/Larix)을 이용한 전세계 실시간 라이브 스트리밍 시스템입니다. 
+      AWS MediaLive로 RTMP 입력을 HLS로 변환하고, CloudFront CDN을 통해 전세계 200+ 엣지 로케이션으로 HTTPS 배포합니다. 
+      Terraform IaC로 전체 인프라를 자동화하여 3분 내 배포가 가능합니다.
+    </p>
+
+    <h2> 핵심 기능</h2>
+    <ul>
+      <li><strong>모바일 RTMP 스트리밍</strong> - Larix/CameraFi 앱으로 어디서나 실시간 방송</li>
+      <li><strong>AWS MediaLive 인코딩</strong> - H.264/AAC 코덱, 480p/720p/1080p 다중 화질 출력</li>
+      <li><strong>CloudFront CDN 배포</strong> - 전세계 200+ 엣지, HTTPS 보안 연결</li>
+      <li><strong>Lambda 자동화</strong> - 채널 시작/중지 자동화로 비용 83% 절감</li>
+      <li><strong>S3 HLS 저장</strong> - 실시간 세그먼트 및 아카이브 저장</li>
+      <li><strong>웹 플레이어</strong> - HLS.js 기반 자동 재생, 적응형 화질 전환</li>
+    </ul>
+
+    <h2> 기술 스택</h2>
+    <div class="tech-grid">
+      <div class="tech-item">AWS MediaLive</div>
+      <div class="tech-item">CloudFront CDN</div>
+      <div class="tech-item">S3</div>
+      <div class="tech-item">Lambda</div>
+      <div class="tech-item">EventBridge</div>
+      <div class="tech-item">Terraform</div>
+      <div class="tech-item">HLS.js</div>
+      <div class="tech-item">CloudWatch</div>
+    </div>
+
+    <h2> 프로토콜 & 코덱</h2>
+    <div class="protocol-grid">
+      <div class="protocol-item">
+        <span class="protocol-icon">📡</span>
+        <span class="protocol-text">RTMP (입력)</span>
+      </div>
+      <div class="protocol-item">
+        <span class="protocol-icon">📺</span>
+        <span class="protocol-text">HLS (출력)</span>
+      </div>
+      <div class="protocol-item">
+        <span class="protocol-icon">🎬</span>
+        <span class="protocol-text">H.264 (비디오)</span>
+      </div>
+      <div class="protocol-item">
+        <span class="protocol-icon">🔊</span>
+        <span class="protocol-text">AAC (오디오)</span>
+      </div>
+    </div>
+
+    <h2> 성과</h2>
+    <div class="achievements">
+      <div class="achievement-badge">✅ 6일 개발 완료</div>
+      <div class="achievement-badge">✅ 100% 완성도</div>
+      <div class="achievement-badge">✅ 1인 풀스택 구현</div>
+      <div class="achievement-badge">✅ 비용 83% 절감</div>
+      <div class="achievement-badge">✅ 3분 배포</div>
+    </div>
+
+    <div class="page-number">1 / 2</div>
+  </div>
+
+  <!-- 페이지 2: 아키텍처 & 상세 구현 -->
+  <div class="slide">
+    <h1> AWS 라이브 스트리밍 시스템 - 상세 구현</h1>
+
+    <h2> 시스템 아키텍처</h2>
+    <div class="architecture-box">
+┌─────────────────────────┐      ┌────────────────────────┐
+│                         │      │        스트리머         │
+│      모바일 (Larix)      │◄──── │ (CameraFi Broadcaster) │
+│                         │      └────────────────────────┘    
+└───────────┬─────────────┘      
+            │ RTMP (Port 1935)
+            ↓
+┌─────────────────────────┐     ┌─────────────────────┐
+│    AWS MediaLive        │◄────│      Lambda         │
+│  (H.264/AAC 인코딩)      │     │   (시작/중지 제어)    │
+│  480p / 720p / 1080p    │     └──────────┬──────────┘
+└───────────┬─────────────┘                │
+            │ HLS (.m3u8 / .ts)            │
+            ↓                              │
+┌─────────────────────────┐     ┌──────────┴──────────┐
+│       S3 HLS            │     │    EventBridge      │
+│   (live/*.ts 세그먼트)   │     │   (스케줄 자동화)     │
+└───────────┬─────────────┘     └─────────────────────┘
+            │ Origin
+            ↓
+┌─────────────────────────┐
+│    CloudFront CDN       │  ← 전세계 200+ 엣지 로케이션
+│   (HTTPS 글로벌 배포)    │
+└───────────┬─────────────┘
+            │ HTTPS
+            ↓
+┌─────────────────────────┐
+│   🌐 웹 플레이어         │  ← 시청자 (HLS.js 자동 재생)
+│   (HTML5 + HLS.js)      │
+└─────────────────────────┘</div>
+
+    <h2> 프로젝트 스크린샷</h2>
+    <div class="screenshot-grid">
+      <div class="screenshot-item"><img src="C:\Users\user\Desktop\gjjang\live-streaming\screenshot\MediaLive_Input_Setting.jpg" alt=""></div>
+      <div class="screenshot-item"><img src="C:\Users\user\Desktop\gjjang\live-streaming\screenshot\RTMP_SettingMobile.jpg" alt=""></div>
+      <div class="screenshot-item"><img src="C:\Users\user\Desktop\gjjang\live-streaming\screenshot\LiveWebPage.jpg" alt=""></div>
+      <div class="screenshot-item"><img src="C:\Users\user\Desktop\gjjang\live-streaming\screenshot\S3_HLS.jpg" alt=""></div>
+      <div class="screenshot-item"><img src="C:\Users\user\Desktop\gjjang\live-streaming\screenshot\windowCMD.jpg" alt=""></div>
+      <div class="screenshot-item"><img src="C:\Users\user\Desktop\gjjang\live-streaming\screenshot\LiveStopMobile.jpg" alt=""></div>
+    </div>
+
+
+    <h2> 상세 구현 내용</h2>
+    
+    <div class="detail-block">
+      <h3>AWS MediaLive 인코딩</h3>
+      <p>RTMP 입력을 HLS 세그먼트로 실시간 변환. H.264/AAC 코덱 사용. 480p/720p/1080p 다중 화질 출력으로 적응형 비트레이트 스트리밍(ABR) 구현.</p>
+    </div>
+
+    <div class="detail-block">
+      <h3>CloudFront CDN 글로벌 배포</h3>
+      <p>전세계 200+ 엣지 로케이션 배포. 무료 SSL 인증서로 HTTPS 보안 연결. S3 Origin 연동 및 캐싱 최적화로 평균 지연시간 50% 감소.</p>
+    </div>
+
+    <div class="detail-block">
+      <h3>Lambda 자동화 & 비용 최적화</h3>
+      <p>Python Lambda로 채널 시작/중지 자동화. EventBridge 스케줄링 연동. 사용 시간만 과금하여 비용 83% 절감 달성. 5분 테스트 약 $0.38.</p>
+    </div>
+
+    <div class="detail-block">
+      <h3>Terraform 인프라 코드화</h3>
+      <p>6개 Phase 모듈화 설계로 전체 인프라 코드화. 환경별 분리(dev/prod) 지원. terraform apply 한 번으로 3분 내 전체 배포 완료.</p>
+    </div>
+
+    <h2> 비용 분석</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <strong>테스트 비용</strong>
+        <p>5분 테스트: ~$0.38 / 1시간 (480p): ~$2.5 / 중지 상태: ~$0.5/월</p>
+      </div>
+      <div class="feature-item">
+        <strong>월간 비용 (일 4시간 기준)</strong>
+        <p>MediaLive: $84 / CloudFront: $51 / S3: $5 / Lambda: $0.2 → 합계 ~$140/월</p>
+      </div>
+    </div>
+
+    <div class="page-number">2 / 2</div>
+  </div>
+
+</div>
+
+</body>
+</html>
